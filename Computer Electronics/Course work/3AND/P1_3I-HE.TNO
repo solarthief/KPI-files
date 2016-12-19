@@ -1,0 +1,219 @@
+********************************************************************************
+***              Micro-Cap 11.0.2.0 (32 bit) Evaluation Version              ***
+***                           jakov.1812@gmail.com                           ***
+***                                   stud                                   ***
+***                      Transient Analysis of P1_3I-HE                      ***
+***                                                                          ***
+********************************************************************************
+Limits
+======
+Time Range               1u
+Maximum Time Step        0
+Number of Points         51
+Temperature              Linear 27
+Retrace Runs             1
+Run Options              Normal
+State Variables          Zero
+Operating Point          On
+Operating Point Only     Off
+Auto Scale Ranges        On
+Accumulate Plots         Off
+Fixed Time Step          Off
+Periodic Steady State    Off
+Ignore Expression Errors Off
+
+
+*****************************************************
+***                Temperature=27                 ***
+*****************************************************
+
+Temperature=27
+
+Model parameters for devices of type Bipolar Junction Transistors NPN
+=====================================================================
+Instance:              Q4              Q1              Q2              Q3   
+Using model:       KT315A          KT315A          KT315A          KT315A   
+LEVEL                   1(*)            1(*)            1(*)            1(*)
+AF                 1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+BF                55.000          55.000          55.000          55.000    
+BR                 1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+CJC               16.854p         16.854p         16.854p         16.854p   
+CJE                1.000p          1.000p          1.000p          1.000p   
+CJS                1.000f          1.000f          1.000f          1.000f   
+EG                 1.110 (*)       1.110 (*)       1.110 (*)       1.110 (*)
+FC               500.000m(*)     500.000m(*)     500.000m(*)     500.000m(*)
+GAMMA             10.000p(*)      10.000p(*)      10.000p(*)      10.000p(*)
+IKF                1.000           1.000           1.000           1.000    
+IKR                1.000           1.000           1.000           1.000    
+IRB                1.000           1.000           1.000           1.000    
+IS                 1.863p          1.863p          1.863p          1.863p   
+ISC                0.100f          0.100f          0.100f          0.100f   
+ISE                0.100f          0.100f          0.100f          0.100f   
+ISS                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+ITF                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+KF                 0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+MJC              330.000m(*)     330.000m(*)     330.000m(*)     330.000m(*)
+MJE              330.000m(*)     330.000m(*)     330.000m(*)     330.000m(*)
+MJS              500.000m        500.000m        500.000m        500.000m   
+NC                 2.000 (*)       2.000 (*)       2.000 (*)       2.000 (*)
+NE                 1.500 (*)       1.500 (*)       1.500 (*)       1.500 (*)
+NF                 1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+NK               500.000m(*)     500.000m(*)     500.000m(*)     500.000m(*)
+NR                 1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+NS                 1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+PTF                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+QCO                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+QUASIMOD           0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+RB                 0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+RBM                1.000           1.000           1.000           1.000    
+RC                 0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+RCO                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+RE                 0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+T_ABS           UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)
+T_MEASURED      UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)
+T_REL_GLOBAL    UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)
+T_REL_LOCAL     UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)    UNDEFINED(*)
+TF               136.944p        136.944p        136.944p        136.944p   
+TR               942.052p        942.052p        942.052p        942.052p   
+TRB1               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRB2               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRC1               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRC2               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRE1               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRE2               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRM1               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+TRM2               0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+VAF               90.000          90.000          90.000          90.000    
+VAR              100.000         100.000         100.000         100.000    
+VG                 1.206 (*)       1.206 (*)       1.206 (*)       1.206 (*)
+VJC              750.000m(*)     750.000m(*)     750.000m(*)     750.000m(*)
+VJE              750.000m(*)     750.000m(*)     750.000m(*)     750.000m(*)
+VJS              750.000m(*)     750.000m(*)     750.000m(*)     750.000m(*)
+VO                10.000 (*)      10.000 (*)      10.000 (*)      10.000 (*)
+VTF                1.000K          1.000K          1.000K          1.000K   
+XCJC               1.000 (*)       1.000 (*)       1.000 (*)       1.000 (*)
+XTB                3.000           3.000           3.000           3.000    
+XTF                0.000 (*)       0.000 (*)       0.000 (*)       0.000 (*)
+XTI                3.000 (*)       3.000 (*)       3.000 (*)       3.000 (*)
+(*) Default Parameter
+
+
+
+Model parameters for devices of type Pulse
+==========================================
+Instance:              V1              V2              V3   
+Using model:        PULSE            P0_5         IMPULSE   
+P1               100.000n(*)     100.000n(*)     100.000n(*)
+P2               110.000n(*)     110.000n(*)     110.000n(*)
+P3               400.000n        300.000n        200.000n   
+P4               410.000n        310.000n        210.000n   
+P5               500.000n        500.000n        500.000n   
+VONE               4.266           4.266           4.266    
+VZERO            160.000m        160.000m        160.000m   
+(*) Default Parameter
+
+
+
+DC Operating Point Voltages
+===========================
+Node         Voltage  Node         Voltage  Node         Voltage 
+1             5.000   2           685.688m  UBUX          4.267  
+B           178.094m  X1          160.000m  X2          160.000m 
+X3          160.000m 
+
+
+Operating Point for Devices of Type Bipolar Junction Transistors NPN
+====================================================================
+Instance:                 Q4              Q1              Q2              Q3
+Using model:          KT315A          KT315A          KT315A          KT315A
+
+Beta Terms:
+BETADC               70.404         -14.056n        -14.056n        -14.056n
+BETAAC               57.359          27.258          27.258          27.258 
+
+Capacitance Terms:
+CPI                   1.094p          7.954p          7.954p          7.954p
+CMU                   9.110p         46.296p         46.296p         46.296p
+CBX                   0.000           0.000           0.000           0.000 
+CJS                   0.387f          0.899f          0.899f          0.899f
+
+Conductance Terms:
+GM                   73.515n         23.974m         23.974m         23.974m
+
+Current Terms:
+IB                   27.169p        644.312u        644.312u        644.312u
+IC                    1.913n         -9.056p         -9.056p         -9.056p
+
+Resistance Terms:
+RPI               780.233MEG          1.137K          1.137K          1.137K
+RX                    0.000           0.000           0.000           0.000 
+RO                   46.850G         42.110          42.110          42.110 
+
+Voltage Terms:
+VBE                 178.094m        525.688m        525.688m        525.688m
+VBC                  -4.089         507.594m        507.594m        507.594m
+VCE                   4.267          18.094m         18.094m         18.094m
+
+Frequency Terms:
+FT                    1.147K       70.332MEG       70.332MEG       70.332MEG
+
+Power DC Terms:
+PD                    8.167n        338.707u        338.707u        338.707u
+PS                    0.000           0.000           0.000           0.000 
+
+DC Pin Currents:
+Ib                   27.169p        644.312u        644.312u        644.312u
+Ic                    1.913n         -9.056p         -9.056p         -9.056p
+Ie                   -1.940n       -644.312u       -644.312u       -644.312u
+Is                    0.000           0.000           0.000           0.000 
+
+Condition:
+State                    OFF             SAT             SAT             SAT
+
+Device Variables:
+area                  1.000           1.000           1.000           1.000 
+vbe                   0.000           0.000           0.000           0.000 
+vce                   0.000           0.000           0.000           0.000 
+
+
+
+Operating Point for Devices of Type Resistor
+============================================
+Instance:                  RB              RK              RN
+V                      4.314         733.012m          4.267 
+Power DC Terms:
+PD                     8.339m          1.264m          7.359m
+
+DC Pin Currents:
+Ir                     1.933m          1.725m          1.725m
+
+Device Variables:
+tc1                    0.000           0.000           0.000 
+tc2                    0.000           0.000           0.000 
+
+
+
+Operating Point for Devices of Type Pulse
+=========================================
+Instance:                  V1              V2              V3
+Using model:            PULSE            P0_5         IMPULSE
+V                    160.000m        160.000m        160.000m
+Power DC Terms:
+PG                  -103.090u       -103.090u       -103.090u
+
+DC Pin Currents:
+ISource              644.312u        644.312u        644.312u
+
+
+
+Operating Point for Devices of Type SPICE Source
+================================================
+Instance:                  E
+V                     5.000 
+Power DC Terms:
+PG                   18.288m
+
+DC Pin Currents:
+ISource              -3.658m
+
+
