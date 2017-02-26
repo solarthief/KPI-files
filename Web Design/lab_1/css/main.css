@@ -26,7 +26,7 @@ h3,h4,p,ul{
 }
 #nav ul{
    list-style-type:none; 
-   padding-top:50px;  
+   padding-top:70px;  
 }
 
 #nav ul li{
@@ -54,7 +54,7 @@ h3,h4,p,ul{
 #header{    
     margin-left:250px;
     width:1268px;
-    min-height:15vh;
+    min-height:150px;
     background:url("../image/header_im.png");
     background-repeat:no-repeat ;
     background-size:100% 100%;   
@@ -62,7 +62,6 @@ h3,h4,p,ul{
 
 #content{    
     margin-left:250px;
-    top:10vh;
     padding:10px;
     width:1180px;
     height:70%;
@@ -75,8 +74,7 @@ h3,h4,p,ul{
 }   
 
 
-#content>ul{
-    list-style-type:none;
+#content>h4,ul{
     text-align:left;    
 }
 
@@ -85,7 +83,7 @@ h3,h4,p,ul{
     border-radius:5px;
 }
 
-#content>img:hover {
+#content>img:hover{
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
 }
 
@@ -113,9 +111,9 @@ h3,h4,p,ul{
 #footer{
     margin-left:250px;
     position: fixed;
-    right: 0;
+    width:1235px;
     bottom: 0;
-    left: 0;
+    
     padding: 1rem;
     border-radius:10px;
     background-color: #363636;
