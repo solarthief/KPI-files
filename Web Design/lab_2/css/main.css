@@ -1,0 +1,127 @@
+body{
+    margin:0;
+    padding:0;
+    background-image:url('../img/the.jpg');
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    min-width:1500px;
+    min-height:100vh;
+    display: block;
+}
+
+@font-face {
+    font-family: PressStart2P-Regular; 
+    src: url(../fonts/PressStart2P-Regular.ttf); 
+}
+
+#container{
+   margin:auto;
+   padding-top:300px;
+} 
+
+#dcal{
+    /*width:350px;*/
+    margin-left:650px;
+}
+
+#cal_form{
+    display:inline;
+}
+h1,h2{
+    font-family:PressStart2P-Regular,'Comic Sans MS';
+    margin:auto;
+    color:#ff0000;
+    text-align:center;
+    font-size: 250%;
+}
+
+input {
+    display:inline;
+    font-family:PressStart2P-Regular,'Comic Sans MS';
+    color:#ff0000;
+    /*color:#ffff4d;*/
+}
+
+input[type=text]{
+    width:18%;
+}
+
+.calInput {
+	background: url('../img/cal.gif') 100% 50% no-repeat;
+	padding-right: 20px;
+	cursor: pointer;
+}
+
+
+.calActive {
+	background-image: url('../img/no_cal.gif');
+}
+
+#cal {
+	position: absolute;
+	visibility: hidden;
+	z-index: 100;
+	width: 170px;
+	background-color: white;
+	margin-top: 2px;
+	padding: 0 2px 2px 2px;
+	border: 1px solid silver;
+	box-shadow: 3px 3px 4px silver;	
+}
+
+
+#calControls {
+	border-collapse: collapse;
+	border: 0;
+	width: 100%;
+}
+#calControls td {
+	border: 0;
+	padding: 0;
+	width: 16px;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+#calControls th {
+	border: 0;
+	padding: 0;
+	line-height: 25px;
+	font-size: 10px;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-weight: bold;
+	white-space: nowrap;
+}
+#calPrevYear { background-image: url('../img/prev_year.gif'); }
+#calPrevMonth { background-image: url('../img/prev_mon.gif'); }
+#calNextMonth { background-image: url('../img/next_mon.gif'); }
+#calNextYear { background-image: url('../img/next_year.gif'); }
+
+
+#calGrid {
+	border: 1px solid silver;
+	width: 100%;
+}
+#calGrid th {
+	border: 1px solid silver;
+	padding: 3px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 10px;
+	background-color: gray;
+	color: white;
+}
+#calGrid td {
+	border: 0;
+	padding: 2px 0;
+	text-align: center;
+	font-family: Tahoma, Geneva, sans-serif;
+	width: 14%;
+	font-size: 11px;
+	cursor: pointer;
+}		
+#calGrid td.calOtherMonth { color: silver; }
+#calGrid td.calWeekend { background-color: #ACD6F5; }
+#calGrid td.calToday { border: 1px solid red; }
+#calGrid td.calSelected { background-color: #FFB3BE; }		

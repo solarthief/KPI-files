@@ -1,0 +1,43 @@
+body{
+    margin:0;
+    padding:0;
+    background-color:pink;
+    min-width:1500px;
+    min-height:100vh;
+    display: block;
+}
+
+@font-face {
+    font-family: PressStart2P-Regular; 
+    src: url(../fonts/PressStart2P-Regular.ttf); 
+}
+
+#container{
+   margin:auto;
+   padding-top:300px;
+} 
+
+.btn{
+    
+    padding:100px 100 100 100;
+}
+
+h1,h2{
+    font-family:PressStart2P-Regular,'Comic Sans MS';
+    margin:auto;
+    color:#ff0000;
+    text-align:center;
+    font-size: 250%;
+}
+
+input {
+    display:inline;
+    font-family:PressStart2P-Regular,'Comic Sans MS';
+    color:#ff0000;
+    /*color:#ffff4d;*/
+}
+
+input[type=text]{
+    width:18%;
+}
+	
