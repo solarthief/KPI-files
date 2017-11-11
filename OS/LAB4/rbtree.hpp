@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-
+#include <iostream>
 
 //Red-black tree
 template<typename T>
@@ -8,58 +7,70 @@ class rbtree{
 private:
   struct _node;
 
-
  //interface functions
 public:
-  rbtree<T> () = delete;
-  rbtree<T> (T val): nil(new _node){
-    tree = new _node (val);
-    tree->left = nil;
-    tree->right = nil;
-    tree->parent = nil;
-    tree->color = NodeColor::BLACK;
+  rbtree<T> (): nil(new _node){
+    root = nil;
+    root->left = nil;
+    root->right = nil;
+    root->parent = nil;
+    root->color = NodeColor::BLACK;
   }
 
+  bool Insert (T key){
+    _node* node =new _node{ NodeColor::RED,key, nil,nil,nil };
 
-  bool Insert (T value){
-    _node* node = new _node (value);
-    InsertRecursive (tree, node);
+    _node* y_tmp_node = nil;
+    _node* x_tmp_node = root;
+
+    while (x_tmp_node != nil){
+      y_tmp_node = x_tmp_node;
+      if (node->key < x_tmp_node->key){
+        x_tmp_node = x_tmp_node->left;
+      } else{
+        x_tmp_node = x_tmp_node->right;
+      }
+    }
+    node->parent = y_tmp_node;
+    if (y_tmp_node == nil){
+      root = node;
+    } else{
+      if (node->key < y_tmp_node->key){
+        y_tmp_node->left = node;
+      } else{
+        y_tmp_node->right = node;
+      }
+    }
+    node->left = nil;
+    node->right = nil;
+    node->color = NodeColor::RED;
+
     FixInsert (node);
     return true;
   }
 
-  bool Delete (T value);
-  bool Find (T value);
-  void PrintTree (){
-    PrintNode (tree, 0);
-  }
+  /*bool Delete (T key){
+    _node* node_to_delete = FindNodeByKey (root,key);
+    _node* y_tmp_node = node_to_delete;
+    _node* x_tmp_node;
+    NodeColor tmp_original_color = y_tmp_node;
 
+    if (node_to_delete == nil){
+      x_tmp_node
+    }
+  }*/
+
+
+
+
+  bool Find (T key);
+  void PrintTree (){
+    PrintNode (root, 0);
+  }
 
 //private methods
 private:
-  void InsertRecursive (_node* root, _node* node){
-    if (root != nil){
-      if (root->value <= node->value){
-        if (root->right != nil){
-          InsertRecursive (root->right, node);
-          return;
-        } else
-          root->right = node;
-      } else{
-        if (root->left != nil){
-          InsertRecursive (root->left, node);
-          return;
-        } else
-          root->left = node;
-      }
-    }
-    node->parent = root;
-    node->left = nil;
-    node->right = nil;
-    node->color = NodeColor::RED;
-  }
-
-
+  
   void FixInsert (_node* node){
     while (node->parent->color == NodeColor::RED){
       if (node->parent == node->parent->parent->left){
@@ -95,59 +106,9 @@ private:
           node->parent->parent->color = NodeColor::RED;
           RotateLeft (node->parent->parent);
         }
-
-
-      }
-       
+      }       
     }
-
-    tree->color = NodeColor::BLACK;
-
-
-
-
-
-
-    ////Case 1: node is root node 
-    //if (Parent (node) == nullptr){
-    //  node->color = NodeColor::BLACK;
-    //} 
-    ////Case 2: node`s parent is BLACK
-    //else if (Parent (node)->color == NodeColor::BLACK){
-    //  return;
-    //}
-    ////Case 3: node`s uncle is RED
-    //else if (Uncle (node)->color == NodeColor::RED){
-    //  Parent (node)->color = NodeColor::BLACK;
-    //  Uncle (node)->color = NodeColor::BLACK;
-    //  Grandparent (node)->color = NodeColor::RED;
-    //  FixInsert (Grandparent(node));
-    //}
-    ////Case 4: node`s uncle is BLACK
-    //else{
-    //  _node* p = Parent (node);
-    //  _node* g = Grandparent (node);
-
-    //  if (node == g->left->right){
-    //    RotateLeft (p);
-    //    node = node->left;
-    //  } else if (node==g->right->left){
-    //    RotateRight (p);
-    //    node = node->right;
-    //  }
-
-    //  p = Parent (node);
-    //  g = Grandparent (node);
-
-    //  if (node == p->left)
-    //    RotateRight (g);
-    //  else
-    //    RotateLeft (g);
-
-    //  p->color = NodeColor::BLACK;
-    //  g->color = NodeColor::RED;
-    //} 
-
+    root->color = NodeColor::BLACK;   
   }
 
 
@@ -157,17 +118,13 @@ private:
       while (level_buf--){
         std::cout << "++";
       }
-      std::cout << node->value << std::endl;
+      std::cout << node->key << std::endl;
       PrintNode (node->left, node_level + 1);
       PrintNode (node->right, node_level + 1);
     }
   }
 
-
-  inline bool IsRed (_node* node){
-    return node->color == RED;
-  }
-
+ 
 
   void RotateLeft (_node* node){
     _node* tmp_node = node->right;
@@ -176,53 +133,57 @@ private:
       tmp_node->left->parent = node;
     tmp_node->parent = node->parent;
     if (node->parent == nil)
-      tree = tmp_node;
-    else if (node == node->parent->left)
-      node->parent->left = tmp_node;
-    else
-      node->parent->right = tmp_node;
+      root = tmp_node;
+    else{
+      if (node == node->parent->left)
+        node->parent->left = tmp_node;
+      else
+        node->parent->right = tmp_node;
+    }
     tmp_node->left = node;
     node->parent = tmp_node;
-
-    //if (tmp_node != nullptr){
-    //  node->right = tmp_node->left;
-    //  tmp_node->left = node;
-    //  tmp_node->parent = node->parent;
-    //  node->parent = tmp_node;
-    //}
   }
 
   void RotateRight (_node* node){
-    _node* tmp_node = node->right;
-    
+
+    _node* tmp_node = node->left;    
     node->left = tmp_node->right;
     if (tmp_node->right != nil)
       tmp_node->right->parent = node;
     tmp_node->parent = node->parent;
     if (node->parent == nil)
-      tree = tmp_node;
-    else if (node == node->parent->right)
-      node->parent->right = tmp_node;
-    else
-      node->parent->left = tmp_node;
+      root = tmp_node;
+    else{
+      if (node == node->parent->right)
+        node->parent->right = tmp_node;
+      else
+        node->parent->left = tmp_node;
+    }
     tmp_node->right = node;
-    node->parent = tmp_node;    
-    
-    
-    
-   /* if (tmp_node != nullptr){
-      node->left = tmp_node->right;
-      tmp_node->right = node;
-      tmp_node->parent = node->parent;
-      node->parent = tmp_node;
-    }*/
+    node->parent = tmp_node;
+ }
+
+  void Transplant (_node* u_node, _node* v_node){
+    if (u_node->parent == nil){
+      root = v_node;
+    } else{
+      if (u_node == u_node->parent->left){
+        u_node->parent->left = v_node;
+      } else{
+        u_node->parent->right = v_node;
+      }
+    }
+    v_node->parent = u_node->parent;
   }
 
-  inline void ColorFlip (_node* node){
-    node->color = (node->color==RED) ? BLACK: RED;
+  _node* FindNodeByKey (_node* node, T key){
+    if (node->key == key){
+      return node;
+    }
+    return ((node->key < key) ? FindNodeByKey (node->left, key) : FindNodeByKey (node->right, key));
   }
 
-  inline _node* Parent (_node* node){
+  /*inline _node* Parent (_node* node){
     return node->parent;
   }
 
@@ -242,7 +203,7 @@ private:
     _node* p = Parent (node);
     _node* g = Grandparent (node);
     return (g==nullptr) ?nullptr : Sibling(p);
-  }
+  }*/
 
 
 //private data
@@ -251,16 +212,12 @@ private:
   
   struct _node{
     NodeColor color;
-    T value;
+    T key;
     _node* left;
     _node* right;
-    _node* parent;
-    _node () :color (NodeColor::BLACK), left (nullptr),
-      right (nullptr), parent (nullptr){};
-    _node (T val) : color (NodeColor::RED), value (val), left(nullptr),
-                    right(nullptr), parent(nullptr) {};
+    _node* parent;    
   };
 
-  _node* tree=nullptr;
+  _node* root;
   _node* nil;
 };
