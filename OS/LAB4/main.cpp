@@ -24,6 +24,10 @@ int main (){
 
   test_tree.PrintTree ();
 
+  test_tree.Delete ("ca");
+
+  test_tree.PrintTree ();
+
   system ("pause");
   return 0;
 }

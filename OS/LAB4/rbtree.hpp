@@ -49,21 +49,57 @@ public:
     return true;
   }
 
-  /*bool Delete (T key){
+  bool Delete (T key){
+
     _node* node_to_delete = FindNodeByKey (root,key);
     _node* y_tmp_node = node_to_delete;
-    _node* x_tmp_node;
-    NodeColor tmp_original_color = y_tmp_node;
+    _node* x_tmp_node = nullptr;
+    NodeColor tmp_original_color = y_tmp_node->color;
+    if (node_to_delete != nil){
+      if (node_to_delete->left == nil){
+        x_tmp_node = node_to_delete->right;
+        Transplant (node_to_delete, node_to_delete->right);
+      } else{
+        if (node_to_delete->right == nil){
+          x_tmp_node = node_to_delete->left;
+          Transplant (node_to_delete, node_to_delete->left);
+        } else{
+          y_tmp_node = TreeMinimum (node_to_delete->right);
+          tmp_original_color = y_tmp_node->color;
+          x_tmp_node = y_tmp_node->right;
+          if (y_tmp_node->parent == node_to_delete){
+            x_tmp_node->parent = y_tmp_node;
+          } else{
+            Transplant (y_tmp_node, y_tmp_node->right);
+            y_tmp_node->right = node_to_delete->right;
+            y_tmp_node->right->parent = y_tmp_node;
+          }
+          Transplant (node_to_delete, y_tmp_node);
+          y_tmp_node->left = node_to_delete->left;
+          y_tmp_node->left->parent = y_tmp_node;
+          y_tmp_node->color = node_to_delete->color;
+        }
+      }
 
-    if (node_to_delete == nil){
-      x_tmp_node
+      if (tmp_original_color == NodeColor::BLACK){
+        FixDelete (x_tmp_node);
+      }
+      return true;
     }
-  }*/
+    return false;
+  }
 
 
 
 
-  bool Find (T key);
+  bool Find (T key){
+    if (FindNodeByKey (root, key) != nil){
+      return true;
+    } else{
+      return false;
+    }
+  }
+
   void PrintTree (){
     PrintNode (root, 0);
   }
@@ -177,33 +213,77 @@ private:
   }
 
   _node* FindNodeByKey (_node* node, T key){
-    if (node->key == key){
-      return node;
+    while (node != nil){
+      if (node->key == key)
+        return node;
+      node = (key<node->key) ?node->left : node->right;
     }
-    return ((node->key < key) ? FindNodeByKey (node->left, key) : FindNodeByKey (node->right, key));
+    return node;
   }
 
-  /*inline _node* Parent (_node* node){
-    return node->parent;
+  _node* TreeMinimum (_node* node){
+    while (node->left != nil){
+      node = node->left;
+    }
+    return node;
   }
 
-  inline _node* Sibling (_node* node){
-    _node* p = Parent (node);
-    if (p == nullptr)
-      return nullptr;
-    return (node == p->left) ? p->right : p->left;
-  }
 
-  inline _node* Grandparent (_node* node){
-    _node* p = Parent (node);
-    return (p == nullptr) ? nullptr : Parent (p);
-  }
+  void FixDelete (_node* node){
 
-  inline _node* Uncle (_node* node){
-    _node* p = Parent (node);
-    _node* g = Grandparent (node);
-    return (g==nullptr) ?nullptr : Sibling(p);
-  }*/
+    while (node != root && node->color == NodeColor::BLACK){
+      if (node == node->parent->left){
+        _node* tmp_node = node->parent->right;
+        if (tmp_node->color == NodeColor::RED){
+          tmp_node->color = NodeColor::BLACK;
+          node->parent->color = NodeColor::RED;
+          RotateLeft (node->parent);
+          tmp_node = node->parent->right;
+        }
+        if (tmp_node->left->color == NodeColor::BLACK && tmp_node->right->color == NodeColor::BLACK){
+          tmp_node->color = NodeColor::RED;
+          node = node->parent;
+        } else{
+          if (tmp_node->right->color == NodeColor::BLACK){
+            tmp_node->left->color = NodeColor::BLACK;
+            tmp_node->color = NodeColor::RED;
+            RotateRight (tmp_node);
+            tmp_node = node->parent->right;
+          }
+          tmp_node->color = node->parent->color;
+          node->parent->color = NodeColor::BLACK;
+          tmp_node->right->color = NodeColor::BLACK;
+          RotateLeft (node->parent);
+          node = root;
+        }
+      } else{
+        _node* tmp_node = node->parent->left;
+        if (tmp_node->color == NodeColor::RED){
+          tmp_node->color = NodeColor::BLACK;
+          node->parent->color = NodeColor::RED;
+          RotateRight (node->parent);
+          tmp_node = node->parent->left;
+        }
+        if (tmp_node->right->color == NodeColor::BLACK && tmp_node->left->color == NodeColor::BLACK){
+          tmp_node->color = NodeColor::RED;
+          node = node->parent;
+        } else{
+          if (tmp_node->left->color == NodeColor::BLACK){
+            tmp_node->right->color = NodeColor::BLACK;
+            tmp_node->color = NodeColor::RED;
+            RotateLeft (tmp_node);
+            tmp_node = node->parent->left;
+          }
+          tmp_node->color = node->parent->color;
+          node->parent->color = NodeColor::BLACK;
+          tmp_node->left->color = NodeColor::BLACK;
+          RotateRight (node->parent);
+          node = root;
+        }
+      }
+    }
+    node->color = NodeColor::BLACK;
+  } 
 
 
 //private data
