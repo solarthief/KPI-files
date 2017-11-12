@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 //Red-black tree
 template<typename T>
@@ -17,6 +18,12 @@ public:
     root->color = NodeColor::BLACK;
   }
 
+  ~rbtree<T> (){    
+    ClearPath (root);
+    delete nil;
+  }
+
+  
   bool Insert (T key){
     _node* node =new _node{ NodeColor::RED,key, nil,nil,nil };
 
@@ -93,7 +100,7 @@ public:
 
 
   bool Find (T key){
-    if (FindNodeByKey (root, key) != nil){
+    if (FindNodeByKey (root, key, true) != nil){
       return true;
     } else{
       return false;
@@ -160,6 +167,16 @@ private:
     }
   }
 
+
+  void ClearPath (_node* node){
+    if (node->left != nil){
+      ClearPath (node->left);
+    }
+    if (node->right != nil){
+      ClearPath (node->right);
+    }
+    delete node;
+  }
  
 
   void RotateLeft (_node* node){
@@ -212,12 +229,22 @@ private:
     v_node->parent = u_node->parent;
   }
 
-  _node* FindNodeByKey (_node* node, T key){
+  _node* FindNodeByKey (_node* node, T key, bool print=false){
+    
     while (node != nil){
-      if (node->key == key)
+      if (print){
+        std::cout << node->key ;
+      }
+      if (node->key == key){
+        std::cout << std::endl;
         return node;
+      } 
+      if (print)
+        std::cout << "-->";
       node = (key<node->key) ?node->left : node->right;
     }
+    if (print)
+      std::cout << "nil" << std::endl;
     return node;
   }
 
