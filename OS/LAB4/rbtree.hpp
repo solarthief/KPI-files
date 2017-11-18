@@ -100,15 +100,11 @@ public:
 
 
   bool Find (T key){
-    if (FindNodeByKey (root, key, true) != nil){
-      return true;
-    } else{
-      return false;
-    }
+    return (FindNodeByKey (root, key, true) != nil);
   }
 
   void PrintTree (){
-    PrintNode (root, 0);
+    PrintNode (root);
   }
 
 //private methods
@@ -155,7 +151,7 @@ private:
   }
 
 
-  void PrintNode (_node* node, unsigned int node_level){
+  void PrintNode (_node* node, unsigned int node_level=0){
     if (node != nil){
       auto level_buf = node_level;
       while (level_buf--){
@@ -198,7 +194,6 @@ private:
   }
 
   void RotateRight (_node* node){
-
     _node* tmp_node = node->left;    
     node->left = tmp_node->right;
     if (tmp_node->right != nil)
@@ -229,8 +224,7 @@ private:
     v_node->parent = u_node->parent;
   }
 
-  _node* FindNodeByKey (_node* node, T key, bool print=false){
-    
+  _node* FindNodeByKey (_node* node, T key, bool print=false){    
     while (node != nil){
       if (print){
         std::cout << node->key ;
