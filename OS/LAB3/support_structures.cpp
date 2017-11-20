@@ -14,15 +14,20 @@ bool Memory::AssignProgram (Program& program){
   return true;
 }
 
+bool Memory::FreeProgram (int program_id){
+  int part_id = GetMemoryPartByProgram (program_id);
+  if (part_id == -1)
+    return false;
+  FreePart (part_id);
+  return true;
+}
 
-void Memory::PrintStatus (){
-  int shift = 0;
+
+void Memory::PrintStatus (){  
   for (auto part : parts){
     std::cout << "||" << "Shift:" <<
-      std::setw (12) << shift << "|| ";
-    shift+=part.size;
-  }
-
+      std::setw (12) << part.shift << "|| ";    
+  } 
   std::cout << std::endl;
   for (auto part : parts){
     std::cout << "||" << "Status:" <<
@@ -43,21 +48,16 @@ void Memory::PrintStatus (){
     std::cout << "||" << "Prog. size:" <<
       std::setw (7) << part.program.size << "|| ";
   }
-  std::cout << std::endl;
-  shift = 0;
+  std::cout << std::endl;  
   for (auto part : parts){
     std::cout << "||" << "Prog. begin:" <<
-      std::setw (6) << ((!part.free) ? (shift) : (0)) << "|| ";
-    shift += part.size;
+      std::setw (6) << ((!part.free) ? (part.shift) : (0)) << "|| ";    
   }
-  std::cout << std::endl;
-  shift = 0;
+  std::cout << std::endl; 
   for (auto part : parts){
     std::cout << "||" << "Prog. end:" <<
-      std::setw (8) << ((!part.free)?(part.program.size + shift):(0)) << "|| ";
-    shift += part.size;
-  }
-
+      std::setw (8) << ((!part.free)?(part.program.size + part.shift):(0)) << "|| ";    
+  } 
   std::cout << std::endl;
   std::cout << std::endl;
 }
@@ -79,9 +79,56 @@ void Memory::FreePart (int part_id){
   }
 }
 
+int Memory::GetMemoryPartByProgram (int program_id){
+  int index = 0;
+  for (auto& part : parts){
+    if (part.program.id == program_id)
+      return index;
+    ++index;
+  }
+  return -1;
+}
+
 size_t Memory::PartsQuantity (){
   return parts.size ();
 }
+
+int Memory::GetAbsoluteAddress (int program_id, int virtual_address){
+  int part_id;
+  if ((part_id = GetMemoryPartByProgram (program_id)) == -1)
+    return -1;
+  return  ((parts[part_id].size>= virtual_address) ? parts[part_id].shift + virtual_address : -1);
+}
+
+bool Memory::ReadNWord (int program_id, int virtual_address, int word_to_read){
+  int part_id = GetMemoryPartByProgram (program_id);
+
+  if ((virtual_address + word_to_read * 4) > parts[part_id].size)
+    return false;
+
+
+  std::cout << "Read " << word_to_read << " words from programm " << program_id << " from virt. address=" << virtual_address <<
+    " and abs. address=" << GetAbsoluteAddress (program_id, virtual_address)<<std::endl;
+
+  return true;   
+}
+
+
+
+bool Memory::WriteNWord (int program_id, int virtual_address, int word_to_write){
+  int part_id = GetMemoryPartByProgram (program_id);
+
+  if ((virtual_address + word_to_write * 4) > parts[part_id].size)
+    return false;
+
+
+  std::cout << "Write " << word_to_write << " words from programm " << program_id << " from virt. address=" << virtual_address <<
+    " and abs. address=" << GetAbsoluteAddress (program_id, virtual_address) << std::endl;
+
+  return true;
+}
+
+
 
 Program& Memory::GetProgramByPart (int part_id){
   return parts[part_id].program;

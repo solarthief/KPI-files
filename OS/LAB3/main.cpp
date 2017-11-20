@@ -19,19 +19,27 @@ int main (int argc, char** argv){
   int tact_count = 0;
   while (!programs.empty()){
 
-
-    auto program = programs.front ();
-    programs.pop_front ();
-
-    if (!mem.AssignProgram (program))
-      programs.push_front (program);   
+    if (mem.AssignProgram (programs.front ()))
+      programs.pop_front ();
 
     std::cout << "Tact N: " << tact_count << std::endl;
     mem.PrintStatus ();
 
 
-    if (rand () % 10 > 4){
+
+
+    if (rand () % 10 > 6){
       int part_to_free = rand () % mem.PartsQuantity ();
+      int n_words = rand () % 384;
+      int virt_addr = rand () % 1536;
+      std::cout << "Tring to read " << n_words << " words from program " << mem.GetProgramByPart (part_to_free).id <<
+        std::endl << "Reading :" << (mem.ReadNWord (mem.GetProgramByPart (part_to_free).id, virt_addr, n_words) ? "success" : "failure")<<std::endl;
+
+      n_words = rand () % 384;
+      virt_addr = rand () % 1536;
+      std::cout << "Tring to write " << n_words << " words from program " << mem.GetProgramByPart ((part_to_free==0)?1:part_to_free-1).id <<
+        std::endl << "Writing :" << 
+        (mem.WriteNWord (mem.GetProgramByPart ((part_to_free == 0) ? 1 : part_to_free - 1).id, virt_addr, n_words) ? "success" : "failure") << std::endl;
 
       std::cout << "Free memory part N " << part_to_free <<
         " with program id=" << mem.GetProgramByPart (part_to_free).id << std::endl << std::endl;
