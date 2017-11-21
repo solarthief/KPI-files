@@ -32,18 +32,19 @@ public:
       shift += part.size;
     }
   }
+  bool IsAllMemoryFree ();
   bool AssignProgram (Program& program);
   bool FreeProgram (int program_id);
   bool ReadNWord (int program_id, int virtual_address, int word_to_read);
   bool WriteNWord (int program_id, int virtual_address, int word_to_write);
-  void FreePart (int part_id);   
+  bool IsPartOccupied (int part_id);
+  void FreePart (int part_id); 
+
   size_t PartsQuantity ();
   int GetAbsoluteAddress (int program_id, int virtual_address);
   void PrintStatus ();
-
-  template<typename T>
-    void PrintValue (std::string val_name, int shift, T val, bool count_use=false);
   Program& GetProgramByPart (int part_id);
+
 private:
   int GetMemoryPartByProgram (int program_id);
   int FindFreePart (int size);

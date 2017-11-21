@@ -122,25 +122,25 @@ bool Memory::WriteNWord (int program_id, int virtual_address, int word_to_write)
     return false;
 
 
-  std::cout << "Write " << word_to_write << " words from programm " << program_id << " from virt. address=" << virtual_address <<
+  std::cout << "Write " << word_to_write << " words to programm " << program_id << " from virt. address=" << virtual_address <<
     " and abs. address=" << GetAbsoluteAddress (program_id, virtual_address) << std::endl;
 
   return true;
 }
 
-
+bool Memory::IsAllMemoryFree (){
+  for (auto& part : parts){
+    if (!part.free)
+      return false;
+  }
+  return true;
+ }
 
 Program& Memory::GetProgramByPart (int part_id){
   return parts[part_id].program;
-}
+} 
 
-template<typename T>
-void Memory::PrintValue (std::string val_name, int shift, T val, bool count_use){
-  int count = 0;
-  for (auto part : parts){
-    std::cout << "||" << val_name <<
-      std::setw (shift) << val*((count_use)?count:1) << "|| ";
-    ++count;
-  }
-  std::cout << std::endl;
+
+bool Memory::IsPartOccupied (int part_id){
+  return !parts[part_id].free;
 }

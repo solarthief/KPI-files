@@ -3,7 +3,7 @@
 #include <memory>
 #include <algorithm>
 
-//Red-black tree
+//avl tree
 template<typename T>
 class avltree{
 private:
@@ -60,7 +60,6 @@ public:
     _node* node_to_delete = FindNodeByKey (root, key);
     _node* tmp=nullptr;
     if (node_to_delete != nil){
-
       if (node_to_delete->left == nil)
         Transplant (node_to_delete, node_to_delete->right);
       else{
@@ -78,8 +77,8 @@ public:
           tmp->left->parent = tmp;
         } 
       } 
-
-      Rebalance (tmp);
+      if(tmp!=nullptr)
+        Rebalance (tmp);
       return true;
     }
 
@@ -126,7 +125,7 @@ private:
     if (node != nil){
       auto level_buf = node_level;
       while (level_buf--){
-        std::cout << "++";
+        std::cout << "||";
       }
       std::cout << node->key<<"  || Node height: "<<Height(node)<< "  || Balance Factor: " << node->balance_factor<< std::endl;
       PrintNode (node->left, node_level + 1);
@@ -142,7 +141,8 @@ private:
     if (node->right != nil){
       ClearPath (node->right);
     }
-    delete node;
+    //if(node!=nil)
+      delete node;
   }
 
 
